@@ -4,40 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PropertyManagement {
-	private Agency estateAgency;
-	private List<House> properties = new ArrayList<House>();
+	private Agency estateAgency = null;
+	private List<Property> properties = new ArrayList<Property>();
 	
 	public PropertyManagement(Agency estateAgency) {
+		super();
 		this.estateAgency = estateAgency;
 	}
 	
-	public void addProperty(House property) {
+	public void addProperty(Property property) {
 		this.properties.add(property);
 	}
 	
-	public void addTenant(House property, Room room, Tenant tenant) {
+	public void addTenant(Property property, Room room, Tenant tenant) {
 		property.occupyRoom(room, tenant);
 	}
 	
 	public String displayProperties() {
-		StringBuffer stringbuf = new StringBuffer();
-		for(House property: properties) {
-			stringbuf.append(property.toString());
-			stringbuf.append("\n");
+		StringBuffer propertiesString = new StringBuffer();
+		for(Property property: properties) {
+			propertiesString.append(property.toString());
+			propertiesString.append("\n");
 		}
-		return stringbuf.toString();
+		return propertiesString.toString();
 	}
 	
 	public String getEstateAgency() {
-		StringBuffer stringbuf = new StringBuffer();
-		stringbuf.append("Agency: ");
-		stringbuf.append(this.estateAgency.getName());
-		stringbuf.append(", Phone Number: ");
-		stringbuf.append(this.estateAgency.getPhoneNumber());
-		return stringbuf.toString();
+		StringBuffer agencyString = new StringBuffer();
+		agencyString.append("Agency: ");
+		agencyString.append(this.estateAgency.getName());
+		agencyString.append(", Phone Number: ");
+		agencyString.append(this.estateAgency.getPhoneNumber());
+		return agencyString.toString();
 	}
 	
-	public void removeProperty(House property) {
+	public void removeProperty(Property property) {
 		if(this.properties.contains(property)) {
 			this.properties.remove(property);
 		}else {

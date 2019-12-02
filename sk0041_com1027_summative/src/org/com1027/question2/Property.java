@@ -1,21 +1,21 @@
-package org.com1027.question1;
+package org.com1027.question2;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class House {
-	private int houseNumber = 0;
+public abstract class Property {
+	private int number = 0;
 	private String street = null;
 	private String city = null;
 	private String postCode = null;
 	private int numberOfRooms = 0;
-	private Map<Room, ITenant> rooms = new HashMap<Room, ITenant>();
+	protected Map<Room, ITenant> rooms = new HashMap<Room, ITenant>();
 	
-	public House(int houseNumber, String street, String city, String postCode, int numberOfRooms) {
+	public Property(int number, String street, String city, String postCode, int numberOfRooms) {
 		super();
 		if(this.validateCity(city)&&this.validatePostCode(postCode)) {
-			this.houseNumber = houseNumber;
+			this.number = number;
 			this.street = street;
 			this.city = city;
 			this.postCode = postCode;
@@ -24,6 +24,12 @@ public class House {
 			throw new IllegalArgumentException();
 		}
 	}
+	
+	public abstract boolean isAvailable();
+	
+	public abstract void occupyRoom(Room room, ITenant tenant);
+	
+	public abstract String displayOccupiedProperty();
 	
 	public int getAvailableRooms() {
 		return numberOfRooms - rooms.keySet().size();
@@ -37,29 +43,19 @@ public class House {
 		return price;
 	}
 	
-	public boolean isAvailable() {
-		return (this.getAvailableRooms()>0);
-	}
-	
-	public void occupyRoom(Room room, ITenant tenant) {
-		rooms.put(room, tenant);
-	}
-	
 	public String toString() {
-		StringBuffer houseString = new StringBuffer();
-		houseString.append(this.houseNumber);
-		houseString.append(" ");
-		houseString.append(this.street);
-		houseString.append(", ");
-		houseString.append(this.city);
-		houseString.append(" ");
-		houseString.append(this.postCode);
-		houseString.append(" (");
-		houseString.append(this.numberOfRooms);
-		houseString.append(" bedroom house :");
-		houseString.append(this.getAvailableRooms());
-		houseString.append(" available)");
-		return houseString.toString();
+		StringBuffer propertyString = new StringBuffer();
+		propertyString.append(this.number);
+		propertyString.append(" ");
+		propertyString.append(this.street);
+		propertyString.append(", ");
+		propertyString.append(this.city);
+		propertyString.append(" ");
+		propertyString.append(this.postCode);
+		propertyString.append(" (");
+		propertyString.append(this.numberOfRooms);
+		propertyString.append(" bedroom ");
+		return propertyString.toString();
 	}
 	
 	private boolean validateCity(String city) {
