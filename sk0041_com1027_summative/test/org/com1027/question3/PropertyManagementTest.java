@@ -7,8 +7,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import javafx.beans.property.Property;
-
 public class PropertyManagementTest {
 
 	@Test
@@ -244,6 +242,41 @@ public class PropertyManagementTest {
 						+ "	Room: 900.0\n" + "	Total: £20400.00 (Council Tax: £0.0)\n" + ""),
 						is("20 The Madrid Road, Guildford GU2 7UB (2 bedroom house :0 available)\n" + "	Room: 900.0\n"
 								+ "	Room: 800.0\n" + "	Total: £20400.00 (Council Tax: £0.0)\n" + "")));
+	}
+	
+	@Test
+	public void testDisplayAllCouncilTaxExemptProperties() {
+		Agency agency = new Agency("Real Agency", "12345 123456");
+		
+		PropertyManagement manage = new PropertyManagement(agency);
+		
+		Property firstProperty = new House(1, "Real Rd", "Real", "CR3 2HY", 2);
+		Property secondProperty = new House(1, "Fake Rd", "Fake", "CW4 2YH", 2);
+		
+		Room room1 = new Room(800);
+		Room room2 = new Room(900);
+
+		Tenant tenant1 = new Tenant("Real", "Person", 18, TenantType.STUDENT);
+		Tenant tenant2 = new Tenant("Fake", "Person", 21, TenantType.STUDENT);
+		
+		firstProperty.occupyRoom(room1, tenant1);
+		firstProperty.occupyRoom(room2, tenant2);
+		
+		firstProperty.setCouncilTax(1000);
+		
+		Tenant tenant3 = new Tenant("Real", "Professional", 27, TenantType.PROFESSIONAL);
+		Tenant tenant4 = new Tenant("Fake", "Professional", 63, TenantType.PROFESSIONAL);
+		
+		secondProperty.occupyRoom(room1, tenant3);
+		secondProperty.occupyRoom(room2, tenant4);
+		
+		secondProperty.setCouncilTax(1000);
+
+		
+		manage.addProperty(firstProperty);
+		manage.addProperty(secondProperty);
+		
+		assertEquals("1 Real Rd, Real CR3 2HY (2 bedroom house :0 available)", manage.displayAllCouncilTaxExemptProperties());
 	}
 
 
