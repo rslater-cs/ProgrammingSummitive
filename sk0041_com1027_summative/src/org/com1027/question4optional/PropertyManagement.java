@@ -1,9 +1,9 @@
-package org.com1027.question3;
+package org.com1027.question4optional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropertyManagement {
+public class PropertyManagement{
 	private Agency estateAgency = null;
 	private List<Property> properties = new ArrayList<Property>();
 	
@@ -23,7 +23,7 @@ public class PropertyManagement {
 	public String displayProperties() {
 		StringBuffer propertiesString = new StringBuffer();
 		for(Property property: properties) {
-			propertiesString.append(property.displayOccupiedProperty());
+			propertiesString.append(property.toString());
 			propertiesString.append("\n");
 		}
 		return propertiesString.toString();
@@ -46,27 +46,7 @@ public class PropertyManagement {
 		}
 	}
 	
-	public double percentageCouncilTaxExemption() {
-		double amountOfExemptions = 0.0;
-		for(Property property: properties) {
-			if(property.councilTax == 0) {
-				amountOfExemptions++;
-			}
-		}
-		System.out.println(amountOfExemptions);
-		System.out.println(properties.size());
-		return (amountOfExemptions / this.properties.size())*100;
-	}
-	
-	public String displayAllCouncilTaxExemptProperties() {
-		StringBuffer taxExemptString = new StringBuffer();
-		for(Property property: properties) {
-			if(property.councilTax == 0) {
-				taxExemptString.append(property.toString());
-				taxExemptString.append("\n");
-			}
-		}
-		return taxExemptString.toString();
+	public void displayAgeInfoGraphic() {
 	}
 
 }

@@ -276,7 +276,7 @@ public class PropertyManagementTest {
 		manage.addProperty(firstProperty);
 		manage.addProperty(secondProperty);
 		
-		assertEquals("1 Real Rd, Real CR3 2HY (2 bedroom house :0 available)", manage.displayAllCouncilTaxExemptProperties());
+		assertEquals("1 Real Rd, Real CR3 2HY (2 bedroom house :0 available)\n", manage.displayAllCouncilTaxExemptProperties());
 	}
 
 

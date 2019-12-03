@@ -1,4 +1,4 @@
-package org.com1027.question2;
+package org.com1027.question4optional;
 
 public class Flat extends Property {
 	private int floor = 0;
