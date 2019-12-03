@@ -7,7 +7,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import javafx.beans.property.Property;
 
 public class PropertyManagementTest {
 
@@ -120,6 +119,54 @@ public class PropertyManagementTest {
 
 		assertEquals("1 Percy Road, Guildford GU2 7XH (2 bedroom house :1 available)\n", pm.displayProperties());
 	}
+	
+	@Test
+	public void testInfoGraphic() {
+		Agency estate = new Agency("Real Agency", "12345 123456");
+		
+		PropertyManagement pm = new PropertyManagement(estate);
+
+		Property house1 = new House(1, "Percy Road", "Guildford", "GU2 7XH", 1);
+		Property house2 = new House(1, "The Chase", "Guildford", "GU2 7UB", 1);
+		Property flat1 = new Flat(1, "Andrew Road", "Guildford", "GU2 7XH", 1, 1);
+		Property flat2 = new Flat(1, "Andrew Road", "Guildford", "GU2 7XH", 1, 2);
+		Property flat3 = new Flat(1, "Woodland Lane", "Guildford", "GU2 3WW", 1, 1);
+
+		Room room1 = new Room(1500);
+		Room room2 = new Room(1000);
+		Room room3 = new Room(200);
+		Room room4 = new Room(500);
+		Room room5 = new Room(440);
+		
+
+		Tenant tenant1 = new Tenant("Alice", "Wonderland", 18, TenantType.STUDENT);
+		Tenant tenant2 = new Tenant("Real", "Student", 26, TenantType.STUDENT);
+		Tenant tenant3 = new Tenant("Real", "Person", 27, TenantType.PROFESSIONAL);
+		Tenant tenant4 = new Tenant("Fake", "Person", 35, TenantType.PROFESSIONAL);
+		Tenant tenant5 = new Tenant("Actual", "Person", 50, TenantType.PROFESSIONAL);
+
+
+		pm.addProperty(house1);
+		pm.addProperty(house2);
+		pm.addProperty(flat1);
+		pm.addProperty(flat2);
+		pm.addProperty(flat3);
+
+		pm.addTenant(house1, room1, tenant1);
+		pm.addTenant(house2, room2, tenant2);
+		pm.addTenant(flat1, room3, tenant3);
+		pm.addTenant(flat2, room4, tenant4);
+		pm.addTenant(flat3, room5, tenant5);
+		
+		
+
+		assertEquals("1 Percy Road, Guildford GU2 7XH (1 bedroom house :0 available)\n\tRoom: 1500.0\n\tTotal: £18000.00 (Council Tax: £0.0)\n"
+				+ "1 The Chase, Guildford GU2 7UB (1 bedroom house :0 available)\n\tRoom: 1000.0\n\tTotal: £12000.00 (Council Tax: £0.0)\n"
+				+ "1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 1 floor :0 available)\n\tRoom: 200.0\n\tTotal: £2900.00 (Council Tax: £0.0)\n"
+				+ "1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 2 floor :0 available)\n\tRoom: 500.0\n\tTotal: £6500.00 (Council Tax: £0.0)\n"
+				+ "1 Woodland Lane, Guildford GU2 3WW (1 bedroom flat on 1 floor :0 available)\n\tRoom: 440.0\n\tTotal: £5780.00 (Council Tax: £0.0)\n", pm.displayProperties());
+		assertEquals("Age to Price:\n\t0-15 |\n\t16-25|---------------\n\t26-35|------\n\t36-45|-----\n\t46-55|-----\n\t55+  |\n", pm.displayAgePriceInfo());
+	}
 
 
 	/**
@@ -139,6 +186,10 @@ public class PropertyManagementTest {
 	 * for each age group, etc. You can also store the information to a file and 
 	 * retrieve them. The purpose for this question is to give you some freedom in
 	 * experimenting with advanced OOP concepts.
+	 * 
+	 * 
+	 * 
+	 * 1 Percy Road, Guildford GU2 7XH (1 bedroom house :0 available)\n\tRoom: 1500.0\n\tTotal: £18000.00 (Council Tax: £0.0)\n1 The Chase, Guildford GU2 7UB (1 bedroom house :0 available)\n\tRoom: 1000.0\n\tTotal: £12000.00 (Council Tax: £0.0)\n1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 1 floor :0 available)\n\tRoom: 200.0\n\tTotal: £2900.00 (Council Tax: £0.0)\n1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 2 floor :0 available)\n\tRoom: 500.0\n\tTotal: £6500.00 (Council Tax: £0.0)\n1 Woodland Lane, Guildford GU2 3WW (1 bedroom flat on 1 floor :0 available)\n\tRoom: 440.0\n\tTotal: £5780.00 (Council Tax: £0.0)
 	 */
 
 }

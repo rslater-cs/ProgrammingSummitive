@@ -23,18 +23,22 @@ public class House extends Property{
 		double totalPrice = 0.0;
 		StringBuffer occupiedPropertiesString = new StringBuffer();
 		occupiedPropertiesString.append(super.toString());
-		occupiedPropertiesString.append("house: ");
+		occupiedPropertiesString.append("house :");
 		occupiedPropertiesString.append(this.getAvailableRooms());
-		occupiedPropertiesString.append(" available)\n");
-		for(Room room: this.rooms.keySet()) {
-			occupiedPropertiesString.append("Room: ");
-			occupiedPropertiesString.append(room.getPrice());
-			occupiedPropertiesString.append("\n");
-			totalPrice += room.getPrice();
+		occupiedPropertiesString.append(" available)");
+		if(this.getAvailableRooms() == 0) {
+			for(Room room: this.rooms.keySet()) {
+				occupiedPropertiesString.append("\n\tRoom: ");
+				occupiedPropertiesString.append(room.getPrice());
+				totalPrice += room.getPrice();
+			}
+			totalPrice *= 12;
+			occupiedPropertiesString.append("\n\tTotal: £");
+			occupiedPropertiesString.append(this.totalFormat.format(totalPrice));
+			occupiedPropertiesString.append(" (Council Tax: £");
+			occupiedPropertiesString.append(this.councilTax);
+			occupiedPropertiesString.append(")");
 		}
-		totalPrice *= 12;
-		occupiedPropertiesString.append("Total: £");
-		occupiedPropertiesString.append(totalPrice);
 		return occupiedPropertiesString.toString();
 	}
 	

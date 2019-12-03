@@ -1,9 +1,12 @@
 package org.com1027.question4optional;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropertyManagement{
+public class PropertyManagement {
 	private Agency estateAgency = null;
 	private List<Property> properties = new ArrayList<Property>();
 	
@@ -23,7 +26,7 @@ public class PropertyManagement{
 	public String displayProperties() {
 		StringBuffer propertiesString = new StringBuffer();
 		for(Property property: properties) {
-			propertiesString.append(property.toString());
+			propertiesString.append(property.displayOccupiedProperty());
 			propertiesString.append("\n");
 		}
 		return propertiesString.toString();
@@ -46,7 +49,91 @@ public class PropertyManagement{
 		}
 	}
 	
-	public void displayAgeInfoGraphic() {
+	public double percentageCouncilTaxExemption() {
+		double amountOfExemptions = 0.0;
+		for(Property property: properties) {
+			if(property.councilTax == 0) {
+				amountOfExemptions++;
+			}
+		}
+		return (amountOfExemptions / this.properties.size())*100;
+	}
+	
+	public String displayAllCouncilTaxExemptProperties() {
+		StringBuffer taxExemptString = new StringBuffer();
+		for(Property property: properties) {
+			if(property.councilTax == 0) {
+				taxExemptString.append(property.toString());
+				taxExemptString.append("\n");
+			}
+		}
+		return taxExemptString.toString();
+	}
+	
+	public String displayAgePriceInfo() {
+		final ArrayList<Integer> ages = new ArrayList<>();
+		final ArrayList<Double> prices = new ArrayList<>();
+		final String[] bounds = new String[]{"0-15 ", "16-25", "26-35", "36-45", "46-55", "55+  "};
+		
+		for(Property property: properties) {
+			for(ITenant tenant: property.rooms.values()) {
+				ages.add(((Tenant)tenant).getAge());
+			}
+			for(Room room: property.rooms.keySet()) {
+				prices.add(room.getPrice());
+			}
+		}
+		
+		final Double[] averagePrices = new Double[] {0.0,0.0,0.0,0.0,0.0,0.0};
+		final int[] agesInBounds = new int[] {0,0,0,0,0,0};
+		
+		for(int x = 0; x<ages.size(); x++) {
+			if(ages.get(x) < 16) {
+				averagePrices[0] += prices.get(x);
+				agesInBounds[0]++;
+			}else if((ages.get(x)-15) < 10) {
+				averagePrices[1] += prices.get(x);
+				agesInBounds[1]++;
+			}else if((ages.get(x)-25) < 10) {
+				averagePrices[2] += prices.get(x);
+				agesInBounds[2]++;
+			}else if((ages.get(x)-35) < 10) {
+				averagePrices[3] += prices.get(x);
+				agesInBounds[3]++;
+			}else if((ages.get(x)-45) < 10) {
+				averagePrices[4] += prices.get(x);
+				agesInBounds[4]++;
+			}else{
+				averagePrices[5] += prices.get(x);
+				agesInBounds[5]++;
+			}
+		}
+		
+		final StringBuffer ageDisplay = new StringBuffer();
+		ageDisplay.append("Age to Price:\n");
+		
+		for(int x = 0; x<6; x++) {
+			if(averagePrices[x] != null) {
+				averagePrices[x] /= (agesInBounds[x]*100);
+				ageDisplay.append("\t");
+				ageDisplay.append(bounds[x]);
+				ageDisplay.append("|");
+				for(int i = 0; i<averagePrices[x]; i++) {
+					ageDisplay.append("-");
+				}
+				ageDisplay.append("\n");
+			}
+		}
+		
+		try {
+			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("D:\\Documents\\Programming\\Java\\Eclipse\\sk0041_com1027_summative\\src\\org\\com1027\\question4optional\\AgeToRoomPriceHistograms.txt", true));
+			fileWriter.append(ageDisplay);
+			fileWriter.close();
+		}catch(Exception e) {
+			ageDisplay.append(e);
+		}
+		
+		return ageDisplay.toString();            
 	}
 
 }
