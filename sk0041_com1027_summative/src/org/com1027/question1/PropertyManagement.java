@@ -56,6 +56,9 @@ public class PropertyManagement {
 	 */
 	public String displayProperties() {
 		StringBuffer propertiesString = new StringBuffer();
+		/**
+		 * Run through every house to append it to the string buffer
+		 */
 		for(House property: properties) {
 			propertiesString.append(property.toString());
 			propertiesString.append("\n");

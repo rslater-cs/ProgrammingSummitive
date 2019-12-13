@@ -46,6 +46,7 @@ public abstract class Property {
 		return price;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer propertyString = new StringBuffer();
 		propertyString.append(this.number);
@@ -87,11 +88,6 @@ public abstract class Property {
 		} else if(numberOfProfessionals == 1 && numberOfStudents == this.numberOfRooms-1) {
 			totalPercentage = 0.75;
 		}
-		System.out.println(numberOfStudents);
-		System.out.println(numberOfProfessionals);
-		System.out.println(rooms.size());
-		System.out.println(totalPercentage);
-		System.out.println("-------------------------");
 		this.councilTax = councilTax * totalPercentage;
 	}
 	

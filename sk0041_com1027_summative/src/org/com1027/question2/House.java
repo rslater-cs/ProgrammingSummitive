@@ -26,18 +26,21 @@ public class House extends Property{
 		occupiedPropertiesString.append("house: ");
 		occupiedPropertiesString.append(this.getAvailableRooms());
 		occupiedPropertiesString.append(" available)\n");
-		for(Room room: this.rooms.keySet()) {
-			occupiedPropertiesString.append("Room: ");
-			occupiedPropertiesString.append(room.getPrice());
-			occupiedPropertiesString.append("\n");
-			totalPrice += room.getPrice();
+		if(this.getAvailableRooms() == 0) {
+			for(Room room: this.rooms.keySet()) {
+				occupiedPropertiesString.append("Room: ");
+				occupiedPropertiesString.append(room.getPrice());
+				occupiedPropertiesString.append("\n");
+				totalPrice += room.getPrice();
+			}
+			totalPrice *= 12;
+			occupiedPropertiesString.append("Total: £");
+			occupiedPropertiesString.append(totalPrice);
 		}
-		totalPrice *= 12;
-		occupiedPropertiesString.append("Total: £");
-		occupiedPropertiesString.append(totalPrice);
 		return occupiedPropertiesString.toString();
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer houseString = new StringBuffer();
 		houseString.append(super.toString());

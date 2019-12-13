@@ -23,6 +23,7 @@ public class Agency {
 		return this.phoneNumber;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer agencyString = new StringBuffer();
 		agencyString.append("Agency: ");

@@ -53,8 +53,6 @@ public class PropertyManagement {
 				amountOfExemptions++;
 			}
 		}
-		System.out.println(amountOfExemptions);
-		System.out.println(properties.size());
 		return (amountOfExemptions / this.properties.size())*100;
 	}
 	

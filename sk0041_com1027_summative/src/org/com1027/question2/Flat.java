@@ -31,18 +31,21 @@ public class Flat extends Property {
 		occupiedPropertiesString.append(" floor: ");
 		occupiedPropertiesString.append(this.getAvailableRooms());
 		occupiedPropertiesString.append(" available)\n");
-		for(Room room: this.rooms.keySet()) {
-			occupiedPropertiesString.append("Room: ");
-			occupiedPropertiesString.append(room.getPrice());
-			occupiedPropertiesString.append("\n");
-			totalPrice += room.getPrice();
+		if(this.getAvailableRooms() == 0) {
+			for(Room room: this.rooms.keySet()) {
+				occupiedPropertiesString.append("Room: ");
+				occupiedPropertiesString.append(room.getPrice());
+				occupiedPropertiesString.append("\n");
+				totalPrice += room.getPrice();
+			}
+			totalPrice = (totalPrice * 12) + 500;
+			occupiedPropertiesString.append("Total: £");
+			occupiedPropertiesString.append(totalPrice);
 		}
-		totalPrice = (totalPrice * 12) + 500;
-		occupiedPropertiesString.append("Total: £");
-		occupiedPropertiesString.append(totalPrice);
 		return occupiedPropertiesString.toString();
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer flatString = new StringBuffer();
 		flatString.append(super.toString());

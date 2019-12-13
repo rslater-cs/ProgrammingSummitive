@@ -71,46 +71,38 @@ public class PropertyManagement {
 	}
 	
 	public String displayAgePriceInfo() {
-		final ArrayList<Integer> ages = new ArrayList<>();
-		final ArrayList<Double> prices = new ArrayList<>();
 		final String[] bounds = new String[]{"0-15 ", "16-25", "26-35", "36-45", "46-55", "55+  "};
-		
-		for(Property property: properties) {
-			for(ITenant tenant: property.rooms.values()) {
-				ages.add(((Tenant)tenant).getAge());
-			}
-			for(Room room: property.rooms.keySet()) {
-				prices.add(room.getPrice());
-			}
-		}
-		
 		final Double[] averagePrices = new Double[] {0.0,0.0,0.0,0.0,0.0,0.0};
 		final int[] agesInBounds = new int[] {0,0,0,0,0,0};
 		
-		for(int x = 0; x<ages.size(); x++) {
-			if(ages.get(x) < 16) {
-				averagePrices[0] += prices.get(x);
-				agesInBounds[0]++;
-			}else if((ages.get(x)-15) < 10) {
-				averagePrices[1] += prices.get(x);
-				agesInBounds[1]++;
-			}else if((ages.get(x)-25) < 10) {
-				averagePrices[2] += prices.get(x);
-				agesInBounds[2]++;
-			}else if((ages.get(x)-35) < 10) {
-				averagePrices[3] += prices.get(x);
-				agesInBounds[3]++;
-			}else if((ages.get(x)-45) < 10) {
-				averagePrices[4] += prices.get(x);
-				agesInBounds[4]++;
-			}else{
-				averagePrices[5] += prices.get(x);
-				agesInBounds[5]++;
+		for(Property property: properties) {
+			for(ITenant tenant: property.rooms.values()) {
+				for(Room room: property.rooms.keySet()) {
+					if(((Tenant)tenant).getAge() < 16) {
+						averagePrices[0] += room.getPrice();
+						agesInBounds[0]++;
+					}else if((((Tenant)tenant).getAge()-15) < 10) {
+						averagePrices[1] += room.getPrice();
+						agesInBounds[1]++;
+					}else if((((Tenant)tenant).getAge()-25) < 10) {
+						averagePrices[2] += room.getPrice();
+						agesInBounds[2]++;
+					}else if((((Tenant)tenant).getAge()-35) < 10) {
+						averagePrices[3] += room.getPrice();
+						agesInBounds[3]++;
+					}else if((((Tenant)tenant).getAge()-45) < 10) {
+						averagePrices[4] += room.getPrice();
+						agesInBounds[4]++;
+					}else{
+						averagePrices[5] += room.getPrice();
+						agesInBounds[5]++;
+					}
+				}
 			}
 		}
 		
 		final StringBuffer ageDisplay = new StringBuffer();
-		ageDisplay.append("Age to Price:\n");
+		ageDisplay.append("Age to Average Price:\n");
 		
 		for(int x = 0; x<6; x++) {
 			if(averagePrices[x] != null) {
@@ -126,7 +118,7 @@ public class PropertyManagement {
 		}
 		
 		try {
-			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("D:\\Documents\\Programming\\Java\\Eclipse\\sk0041_com1027_summative\\src\\org\\com1027\\question4optional\\AgeToRoomPriceHistograms.txt", true));
+			BufferedWriter fileWriter = new BufferedWriter(new FileWriter("AgeToRoomPriceHistograms.txt", true));
 			fileWriter.append(ageDisplay);
 			fileWriter.close();
 		}catch(Exception e) {

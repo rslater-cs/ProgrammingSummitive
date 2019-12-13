@@ -45,6 +45,7 @@ public class House {
 		rooms.put(room, tenant);
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer houseString = new StringBuffer();
 		houseString.append(this.houseNumber);

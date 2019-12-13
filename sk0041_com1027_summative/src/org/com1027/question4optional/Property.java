@@ -46,6 +46,7 @@ public abstract class Property {
 		return price;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer propertyString = new StringBuffer();
 		propertyString.append(this.number);

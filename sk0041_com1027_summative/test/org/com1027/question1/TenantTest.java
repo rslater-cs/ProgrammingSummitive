@@ -9,13 +9,13 @@ public class TenantTest {
 	@Test
 	public void testToString() {
 		Tenant tenant = new Tenant("Ryan", "Slater", 18, TenantType.STUDENT);
-		assertEquals("Ryan Slater is 18 years old and a student", tenant.toString());
+		assertEquals("Ryan Slater", tenant.toString());
 	}
 	
 	@Test
 	public void secondTestToString() {
 		Tenant tenant = new Tenant("Michael", "Smith", 24, TenantType.PROFESSIONAL);
-		assertEquals("Michael Smith is 24 years old and a professional", tenant.toString());
+		assertEquals("Michael Smith", tenant.toString());
 	}
 	
 	@Test

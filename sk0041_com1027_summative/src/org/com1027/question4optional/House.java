@@ -42,6 +42,7 @@ public class House extends Property{
 		return occupiedPropertiesString.toString();
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer houseString = new StringBuffer();
 		houseString.append(super.toString());

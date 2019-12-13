@@ -47,6 +47,7 @@ public class Flat extends Property {
 		return occupiedPropertiesString.toString();
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer flatString = new StringBuffer();
 		flatString.append(super.toString());
