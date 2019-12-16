@@ -1,8 +1,11 @@
 package org.com1027.question4optional;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +105,20 @@ public class PropertyManagement {
 		}
 		
 		final StringBuffer ageDisplay = new StringBuffer();
-		ageDisplay.append("Age to Average Price:\n");
+		ageDisplay.append("Age to Average Price(");
+		
+		int lines = 0;
+		try {
+			BufferedReader fileReader = new BufferedReader(new FileReader("AgeToRoomPriceHistograms.txt"));
+			String line = null;
+			while((line = fileReader.readLine()) != null) {
+				++lines;
+			}
+			ageDisplay.append(lines/7);
+		}catch(Exception e) {
+			ageDisplay.append(e);
+		}
+		ageDisplay.append("):\n");
 		
 		for(int x = 0; x<6; x++) {
 			if(averagePrices[x] != null) {

@@ -165,7 +165,7 @@ public class PropertyManagementTest {
 				+ "1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 1 floor :0 available)\n\tRoom: 200.0\n\tTotal: £2900.00 (Council Tax: £0.0)\n"
 				+ "1 Andrew Road, Guildford GU2 7XH (1 bedroom flat on 2 floor :0 available)\n\tRoom: 500.0\n\tTotal: £6500.00 (Council Tax: £0.0)\n"
 				+ "1 Woodland Lane, Guildford GU2 3WW (1 bedroom flat on 1 floor :0 available)\n\tRoom: 440.0\n\tTotal: £5780.00 (Council Tax: £0.0)\n", pm.displayProperties());
-		assertEquals("Age to Average Price:\n\t0-15 |\n\t16-25|---------------\n\t26-35|------\n\t36-45|-----\n\t46-55|-----\n\t55+  |\n", pm.displayAgePriceInfo());
+		assertEquals("Age to Average Price(3):\n\t0-15 |\n\t16-25|---------------\n\t26-35|------\n\t36-45|-----\n\t46-55|-----\n\t55+  |\n", pm.displayAgePriceInfo());
 	}
 
 
